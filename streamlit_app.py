@@ -17,7 +17,7 @@ import time
 import random
 
 #%%
-st.set_page_config( page_title="Mnist Classification",page_icon="🧊",layout="wide",initial_sidebar_state="expanded")
+
 
 col1, col2= st.beta_columns(2)
 with col1:
@@ -40,9 +40,9 @@ Split = st.sidebar.slider('Train-Test Splitup (in %)', 0.1,0.9,.70)
 st.sidebar.markdown("""**Select SVM Parameters**""")
 
 kernal= st.sidebar.selectbox('Kernel',('rbf','linear', 'poly', 'sigmoid', 'precomputed'))
-probability = st.sidebar.radio("Probability:", ('False','True'))
-Tol= st.sidebar.text_input("Tolerance for stopping Criteria (default: 1e-4)","1e-4")
-Max_Iteration=st.sidebar.text_input("Number of iteration (default: 50)","50")
+
+Tol= st.sidebar.text_input("Tolerance for stopping Criteria (default: 1e-3)","1e-3")
+Max_Iteration=st.sidebar.text_input("Number of iteration (default: -1)","-1")
 
 
 #%%
@@ -50,8 +50,8 @@ Max_Iteration=st.sidebar.text_input("Number of iteration (default: 50)","50")
 parameters={ 'Kernal':kernal,
              'Tol':Tol,
              'Max_Iteration':Max_Iteration,
-   	     'kernal':kernal,
-              'Probability': probability}
+   	     'kernal':kernal
+              }
        
 
 #%%
@@ -96,7 +96,7 @@ def SVM_model(parameters,Data):
 
     X_train, X_test, y_train, y_test= train_test_splited(Data,Split)
 
-    clf=svm.SVC(gamma=0.001)
+    clf=svm.SVC(kernel=parameters['kernal'],tol=float(parameters['Tol']),max_iter=int(parameters['Max_Iteration']))
     clf=clf.fit(X_train,y_train)
     
     model_data={"model":clf,
@@ -108,7 +108,6 @@ def SVM_model(parameters,Data):
 def prediction_test(model):
 
      prediction=model["model"].predict(model["X_test"])
-     
      return(prediction)
 
 def prediction_plot(model,prediction):
@@ -116,7 +115,7 @@ def prediction_plot(model,prediction):
    
     random_no=random.randint(0,len(prediction))
     image=model["X_test"][random_no]
-    st.write(" Predicted Label :",prediction[random_no],"Actual Label :",model["Y_actual"][random_no] )
+    st.write(" Prediction :",prediction[random_no],"Actual Label :",model["Y_actual"][random_no] )
     fig, ax = plt.subplots()
     
     image = image.reshape(8, 8)
@@ -335,4 +334,4 @@ if(st.sidebar.button("Click to train the SVN Classification Model")):
 
    
     
-    
+
