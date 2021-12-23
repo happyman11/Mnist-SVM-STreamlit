@@ -17,7 +17,7 @@ import time
 import random
 
 #%%
-
+st.set_page_config(layout="wide")
 
 
 # Text/Title
