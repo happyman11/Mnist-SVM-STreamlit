@@ -29,7 +29,7 @@ st.title("Logistic Regression - Mnist Dataset")
 with st.beta_container():
  #navbar 
 #https://bootsnipp.com/snippets/nNX3a     https://www.mockplus.com/blog/post/bootstrap-navbar-template
-   components.html(
+    components.html(
        """
        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -387,8 +387,7 @@ if(st.sidebar.button("Click to train the SVN Classification Model")):
              }))
  
 
-   
-    with st.beta_container():
+with st.beta_container():
     components.html(
      """
      <div style="position: fixed;
