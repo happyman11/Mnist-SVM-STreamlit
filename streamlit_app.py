@@ -21,7 +21,7 @@ st.set_page_config(layout="wide")
 
 
 # Text/Title
-st.title("Logistic Regression - Mnist Dataset")
+st.title("SVM- Mnist Dataset")
 
 #%%
 #Navigation bar
